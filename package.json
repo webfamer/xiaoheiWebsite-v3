@@ -1,0 +1,23 @@
+{
+  "name": "my-vue-app",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "amfe-flexible": "^2.2.1",
+    "axios": "^0.23.0",
+    "vant": "^3.2.5",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.11"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "postcss-pxtorem": "^6.0.0",
+    "sass": "^1.43.2",
+    "vite": "^2.6.4",
+    "vite-plugin-style-import": "^1.2.1"
+  }
+}
