@@ -176,6 +176,14 @@ braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
+call-bind@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.npm.taobao.org/call-bind/download/call-bind-1.0.2.tgz#b1d4e89e688119c3c9a903ad30abb2f6a919be3c"
+  integrity sha1-sdTonmiBGcPJqQOtMKuy9qkZvjw=
+  dependencies:
+    function-bind "^1.1.1"
+    get-intrinsic "^1.0.2"
+
 camel-case@^4.1.2:
   version "4.1.2"
   resolved "https://registry.nlark.com/camel-case/download/camel-case-4.1.2.tgz#9728072a954f805228225a6deea6b38461e1bd5a"
@@ -395,12 +403,26 @@ function-bind@^1.1.1:
   resolved "https://registry.nlark.com/function-bind/download/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=
 
+get-intrinsic@^1.0.2:
+  version "1.1.1"
+  resolved "https://registry.npm.taobao.org/get-intrinsic/download/get-intrinsic-1.1.1.tgz#15f59f376f855c446963948f0d24cd3637b4abc6"
+  integrity sha1-FfWfN2+FXERpY5SPDSTNNje0q8Y=
+  dependencies:
+    function-bind "^1.1.1"
+    has "^1.0.3"
+    has-symbols "^1.0.1"
+
 glob-parent@~5.1.2:
   version "5.1.2"
   resolved "https://registry.npmmirror.com/glob-parent/download/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
   integrity sha1-hpgyxYA0/mikCTwX3BXoNA2EAcQ=
   dependencies:
     is-glob "^4.0.1"
+
+has-symbols@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.npm.taobao.org/has-symbols/download/has-symbols-1.0.2.tgz?cache=0&sync_timestamp=1614443617831&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fhas-symbols%2Fdownload%2Fhas-symbols-1.0.2.tgz#165d3070c00309752a1236a479331e3ac56f1423"
+  integrity sha1-Fl0wcMADCXUqEjakeTMeOsVvFCM=
 
 has@^1.0.3:
   version "1.0.3"
@@ -485,6 +507,11 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   resolved "https://registry.npm.taobao.org/normalize-path/download/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha1-Dc1p/yOhybEf0JeDFmRKA4ghamU=
 
+object-inspect@^1.9.0:
+  version "1.11.0"
+  resolved "https://registry.nlark.com/object-inspect/download/object-inspect-1.11.0.tgz#9dceb146cedd4148a0d9e51ab88d34cf509922b1"
+  integrity sha1-nc6xRs7dQUig2eUauI00z1CZIrE=
+
 param-case@^3.0.4:
   version "3.0.4"
   resolved "https://registry.nlark.com/param-case/download/param-case-3.0.4.tgz#7d17fe4aa12bde34d4a77d91acfb6219caad01c5"
@@ -538,6 +565,13 @@ postcss@^8.1.10, postcss@^8.3.8:
     picocolors "^0.2.1"
     source-map-js "^0.6.2"
 
+qs@^6.10.1:
+  version "6.10.1"
+  resolved "https://registry.nlark.com/qs/download/qs-6.10.1.tgz#4931482fa8d647a5aab799c5271d2133b981fb6a"
+  integrity sha1-STFIL6jWR6Wqt5nFJx0hM7mB+2o=
+  dependencies:
+    side-channel "^1.0.4"
+
 readdirp@~3.6.0:
   version "3.6.0"
   resolved "https://registry.nlark.com/readdirp/download/readdirp-3.6.0.tgz#74a370bd857116e245b29cc97340cd431a02a6c7"
@@ -575,6 +609,15 @@ sentence-case@^3.0.4:
     no-case "^3.0.4"
     tslib "^2.0.3"
     upper-case-first "^2.0.2"
+
+side-channel@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.npm.taobao.org/side-channel/download/side-channel-1.0.4.tgz#efce5c8fdc104ee751b25c58d4290011fa5ea2cf"
+  integrity sha1-785cj9wQTudRslxY1CkAEfpeos8=
+  dependencies:
+    call-bind "^1.0.0"
+    get-intrinsic "^1.0.2"
+    object-inspect "^1.9.0"
 
 snake-case@^3.0.4:
   version "3.0.4"

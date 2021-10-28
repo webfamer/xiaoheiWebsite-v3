@@ -2,9 +2,11 @@
   <div class="software">
     <div class="software-c">
       <ul class="nav">
-        <li><a href="http://kuan.91miandan.top">软件列表</a></li>
+        <li>
+          <a href="http://kuan.91miandan.top">软件汇总</a>
+        </li>
         /
-        <li>软件汇总</li>
+        <li>{{ menuName }}</li>
       </ul>
       <div class="title">
         <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o">
@@ -23,12 +25,12 @@
       <div class="menu" v-for="(item, index) in softwareInfo" :key="index">
         <div class="main">
           <div class="menu-l">
-            <img width="128px" height="128px" v-lazy="item.img" />
+            <van-image width="128px" height="128px" :src="item.logo" />
           </div>
           <div class="menu-r">
             <h3>{{ item.name }}</h3>
             <p>
-              {{ item.description }}
+              {{ item.tips }}
             </p>
             <p>
               开发者：<van-button type="primary" size="mini"
@@ -50,17 +52,30 @@
 import { reactive, ref, toRefs } from "vue";
 import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { getSoftwareListAPi } from "@/api/software";
 export default {
   setup() {
     const data = reactive({
       softwareInfo: [],
       searchValue: "",
+      menuName: "",
     });
     const route = useRoute();
     const router = useRouter();
 
     onMounted(() => {
-      console.log(route.query);
+      const { type, menuName } = route.query;
+      data.menuName = menuName;
+      let params = {
+        page: 1,
+        pageSize: 5000,
+        type: Number(type),
+      };
+      getSoftwareListAPi(params).then((res) => {
+        if (res.list.length > 0) {
+          data.softwareInfo = res.list;
+        }
+      });
     });
     return { ...toRefs(data) };
   },

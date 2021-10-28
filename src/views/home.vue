@@ -25,7 +25,7 @@
         :key="index"
         :icon="item.icon"
         :text="item.name"
-        @click="goList(item.type)"
+        @click="goList(item)"
       />
     </van-grid>
     <p class="joinUs" @click="joinUs">加入我们</p>
@@ -92,8 +92,11 @@ export default {
       ],
     });
     const Router = useRouter();
-    const goList = (type) => {
-      Router.push({ path: "/softwareList", query: { type: type } });
+    const goList = (data) => {
+      Router.push({
+        path: "/softwareList",
+        query: { type: data.type, menuName: data.name },
+      });
     };
     return { ...toRefs(data), goList };
   },
