@@ -1,13 +1,19 @@
 <template>
   <div class="software">
     <div class="software-c">
-      <ul class="nav">
+      <!-- <ul class="nav">
         <li>
           <a href="http://kuan.91miandan.top">软件汇总</a>
         </li>
         /
         <li>{{ menuName }}</li>
-      </ul>
+      </ul> -->
+      <van-nav-bar
+        :title="menuName"
+        left-text="返回"
+        left-arrow
+        @click-left="onClickLeft"
+      />
       <div class="title">
         <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o">
           有事联系酷安昵称：滑稽用户工号9527/wechat:liyini321
@@ -17,7 +23,7 @@
         <van-search
           v-model="searchValue"
           shape="round"
-          @search="searchList"
+          @search="getSoftWareList"
           background="#1885A6"
           placeholder="请输入搜索关键词"
         />
@@ -53,31 +59,85 @@ import { reactive, ref, toRefs } from "vue";
 import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getSoftwareListAPi } from "@/api/software";
+import { Toast } from "vant";
 export default {
   setup() {
     const data = reactive({
       softwareInfo: [],
       searchValue: "",
       menuName: "",
+      page: 1,
+      pageSize: 10,
     });
     const route = useRoute();
     const router = useRouter();
-
     onMounted(() => {
+      getSoftWareList();
+      onScrollData();
+    });
+    const onClickLeft = () => history.back();
+    const debounce = (func, time) => {
+      let timer;
+      return function () {
+        let arg = arguments;
+        let context = this;
+        if (timer) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+          func.apply(context, arg);
+        }, time);
+      };
+    };
+    const getSoftWareList = () => {
       const { type, menuName } = route.query;
       data.menuName = menuName;
       let params = {
-        page: 1,
-        pageSize: 5000,
+        page: data.page,
+        pageSize: data.pageSize,
         type: Number(type),
+        name: data.searchValue,
       };
       getSoftwareListAPi(params).then((res) => {
         if (res.list.length > 0) {
           data.softwareInfo = res.list;
         }
       });
-    });
-    return { ...toRefs(data) };
+    };
+    const onScrollData = debounce(() => {
+      let loading = true;
+      window.onscroll = async () => {
+        let isOnBottom =
+          window.innerHeight + document.documentElement.scrollTop + 30 >
+          document.documentElement.scrollHeight;
+        console.log(loading);
+        console.log(
+          window.innerHeight,
+          document.documentElement.scrollTop,
+          document.documentElement.scrollHeight
+        );
+        if (loading && isOnBottom) {
+          data.page++;
+          let params = {
+            page: data.page,
+            pageSize: data.pageSize,
+            type: Number(route.query.type),
+            name: data.searchValue,
+          };
+          getSoftwareListAPi(params).then((res) => {
+            if (res.list.length === 0) {
+              loading = false;
+              Toast.fail("无更多数据");
+            } else {
+              data.softwareInfo = [...data.softwareInfo, ...res.list];
+              loading = true;
+            }
+          });
+        }
+      };
+    }, 500);
+
+    return { ...toRefs(data), getSoftWareList, onClickLeft };
   },
 };
 </script>

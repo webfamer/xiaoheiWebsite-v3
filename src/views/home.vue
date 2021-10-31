@@ -28,12 +28,20 @@
         @click="goList(item)"
       />
     </van-grid>
-    <p class="joinUs" @click="joinUs">加入我们</p>
+    <!-- <p class="joinUs" @click="joinUs">加入我们</p> -->
+    <van-tabbar v-model="Tabactive">
+      <van-tabbar-item name="home" icon="home-o" to="/home"
+        >首页</van-tabbar-item
+      >
+      <van-tabbar-item name="more" icon="search" to="/more"
+        >更多</van-tabbar-item
+      >
+    </van-tabbar>
   </div>
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, ref } from "vue";
 import { useRouter } from "vue-router";
 import bgImg from "@/assets/imgs/1.jpg";
 export default {
@@ -44,47 +52,55 @@ export default {
       },
       dataList: [
         {
-          type: 1,
+          type: "",
           name: "软件汇总",
           url: window.location.href + "software",
           icon: "cluster",
         },
         {
+          type: 1,
           name: "小说专区",
           url: "https://91miandan.lanzoui.com/b00nmpg1i",
           icon: "column",
         },
         {
+          type: 2,
           name: "破解游戏",
           url: "https://91miandan.lanzoui.com/b00nmpggd",
           icon: "smile",
         },
         {
+          type: 3,
           name: "影视专区",
           url: "https://91miandan.lanzoui.com/b00nmpgli",
           icon: "video",
         },
         {
+          type: 4,
           name: "游戏辅助",
           url: "https://91miandan.lanzoui.com/b00nmpiuj",
           icon: "fire",
         },
         {
+          type: 7,
           name: "QQ工具",
           url: "https://91miandan.lanzoui.com/b00nmpixc",
           icon: "comment-circle",
         },
         {
+          type: 5,
           name: "秋名山",
           url: "https://91miandan.lanzoui.com/b00nmpjaf",
           icon: "friends",
         },
         {
+          type: 8,
           name: "实用工具",
           url: "https://91miandan.lanzoui.com/b00nmpjje",
           icon: "audio",
         },
         {
+          type: 6,
           name: "音乐专区",
           url: "https://91miandan.lanzoui.com/b00nmpjxi",
           icon: "music",
@@ -92,13 +108,17 @@ export default {
       ],
     });
     const Router = useRouter();
+    const Tabactive = ref("home");
     const goList = (data) => {
       Router.push({
         path: "/softwareList",
         query: { type: data.type, menuName: data.name },
       });
     };
-    return { ...toRefs(data), goList };
+    const gotoShop = () => {
+      window.open("http://shop.91miandan.top");
+    };
+    return { ...toRefs(data), goList, Tabactive, gotoShop };
   },
 };
 </script>
