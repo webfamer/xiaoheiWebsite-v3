@@ -49,6 +49,9 @@
           立即下载
         </div>
       </div>
+      <div class="toTop" v-show="isShowTopBtn" @click="goTop">
+        <van-image round width="1rem" height="1rem" :src="topIcon" />
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +63,7 @@ import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getSoftwareListAPi } from "@/api/software";
 import { Toast } from "vant";
+import topIcon from "@/assets/imgs/toTop.png";
 export default {
   setup() {
     const data = reactive({
@@ -68,6 +72,8 @@ export default {
       menuName: "",
       page: 1,
       pageSize: 10,
+      topIcon: topIcon,
+      isShowTopBtn: false,
     });
     const route = useRoute();
     const router = useRouter();
@@ -134,10 +140,28 @@ export default {
             }
           });
         }
+        showTopBtn(); //是否显示回到顶部按钮
+        console.log(document.documentElement.scrollTop, "卷曲的顶部");
       };
     }, 500);
-
-    return { ...toRefs(data), getSoftWareList, onClickLeft };
+    const showTopBtn = () => {
+      let scrollTop = document.documentElement.scrollTop;
+      if (scrollTop > 140) {
+        data.isShowTopBtn = true;
+      } else {
+        data.isShowTopBtn = false;
+      }
+    };
+    const goTop = () => {
+      let timer = setInterval(() => {
+        let scrollTop = document.documentElement.scrollTop;
+        document.documentElement.scrollTop = scrollTop - 40;
+        if (scrollTop < 30) {
+          clearInterval(timer);
+        }
+      }, 10);
+    };
+    return { ...toRefs(data), getSoftWareList, onClickLeft, goTop };
   },
 };
 </script>
@@ -148,6 +172,11 @@ export default {
   .software-c {
     margin: 0 auto;
     width: 345px;
+  }
+  .toTop {
+    position: fixed;
+    bottom: 0.7rem;
+    right: 0.373333rem;
   }
   .nav {
     background: #fff;
