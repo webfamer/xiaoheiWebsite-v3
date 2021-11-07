@@ -57,6 +57,8 @@ export default {
     });
     const onSubmit = () => {
       console.log(123);
+      let cookieMatch =
+        data.jdCookie.match(/pt_key=.+?;/) + data.jdCookie.match(/pt_pin=.+?;/);
       axois({
         headers: {
           "Content-Type": "application/json;charset=UTF-8",
@@ -66,7 +68,7 @@ export default {
         url: "http://42.193.174.155:5700/api/envs",
         data: {
           name: "JD_COOKIE",
-          value: data.jdCookie,
+          value: cookieMatch,
           remarks: data.remarks,
         },
       }).then((res) => {
