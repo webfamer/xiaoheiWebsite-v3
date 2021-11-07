@@ -45,7 +45,7 @@
             </p>
           </div>
         </div>
-        <div class="downsoft" @click="downsoftware(item.downloanUrl)">
+        <div class="downsoft" @click="downsoftware(item.downloadUrl)">
           立即下载
         </div>
       </div>
@@ -58,7 +58,7 @@
 
 <script>
 // import softApi from "../api/api";
-import { reactive, ref, toRefs } from "vue";
+import { reactive, ref, toRefs,toRaw } from "vue";
 import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getSoftwareListAPi } from "@/api/software";
@@ -95,6 +95,10 @@ export default {
         }, time);
       };
     };
+    const downsoftware = (url)=>{
+      console.log(toRaw(url))
+      window.open(toRaw(url));
+    }
     const getSoftWareList = () => {
       const { type, menuName } = route.query;
       data.menuName = menuName;
@@ -161,7 +165,7 @@ export default {
         }
       }, 10);
     };
-    return { ...toRefs(data), getSoftWareList, onClickLeft, goTop };
+    return { ...toRefs(data), getSoftWareList, onClickLeft, goTop,downsoftware };
   },
 };
 </script>
