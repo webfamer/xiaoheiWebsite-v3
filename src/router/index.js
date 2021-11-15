@@ -20,6 +20,11 @@ const routes = [
     component: () => import('@/views/softwareList.vue')
   },
   {
+    path: '/softwareDetail',
+    name: 'softwareDetail',
+    component: () => import('@/views/softwareDetail.vue')
+  },
+  {
     path: '/more',
     name: 'more',
     component: () => import('@/views/more.vue')

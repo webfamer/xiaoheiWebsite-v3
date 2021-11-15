@@ -29,14 +29,14 @@
         />
       </div>
       <div class="menu" v-for="(item, index) in softwareInfo" :key="index">
-        <div class="main">
+        <div class="main" @click="goDetail(item)">
           <div class="menu-l">
             <van-image width="128px" height="128px" :src="item.logo" />
           </div>
           <div class="menu-r">
             <h3>{{ item.name }}</h3>
-            <p>
-              {{ item.tips }}
+            <p class="wrap">
+              {{ String(item.description).substr(0, 28) }}.....
             </p>
             <p>
               开发者：<van-button type="primary" size="mini"
@@ -58,7 +58,7 @@
 
 <script>
 // import softApi from "../api/api";
-import { reactive, ref, toRefs, toRaw } from "vue";
+import { reactive, ref, toRefs, toRaw, computed } from "vue";
 import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getSoftwareListAPi } from "@/api/software";
@@ -117,6 +117,9 @@ export default {
     const onScrollData = debounce(() => {
       let loading = true;
       window.onscroll = async () => {
+        if (route.path !== "/softwareList") {
+          return;
+        }
         let isOnBottom =
           window.innerHeight + document.documentElement.scrollTop + 30 >
           document.documentElement.scrollHeight;
@@ -165,18 +168,34 @@ export default {
         }
       }, 10);
     };
+    const goDetail = (data) => {
+      router.push({
+        path: "/softwareDetail",
+        query: { id: data.id },
+      });
+    };
     return {
       ...toRefs(data),
       getSoftWareList,
       onClickLeft,
       goTop,
       downsoftware,
+      goDetail,
     };
   },
 };
 </script>
 
 <style scoped lang="scss">
+.wrap {
+  table-layout: fixed;
+
+  word-wrap: break-all;
+
+  word-break: normal;
+
+  overflow: hidden;
+}
 .software {
   background: #f0f3f4;
   .software-c {

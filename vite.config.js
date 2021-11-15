@@ -37,12 +37,10 @@ export default defineConfig({
   server: {
     proxy: {
       '/softApi': {
-        target: 'http://42.193.174.155',
+        target: 'http://localhost:3001',
         changeOrigin: true,
         ws: true,
-        // pathRewrite: {
-        //   '^/api': ''
-        // }
+        rewrite: (path) => path.replace(/\/softApi/, '')
       }
     }
   }

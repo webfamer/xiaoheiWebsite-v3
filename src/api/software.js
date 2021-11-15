@@ -7,3 +7,10 @@ export function getSoftwareListAPi(data) {
         data: data,
     })
 }
+export function getSoftwareDetailAPi(data) {
+    return request({
+        url: '/detail',
+        method: 'post',
+        data: data,
+    })
+}
