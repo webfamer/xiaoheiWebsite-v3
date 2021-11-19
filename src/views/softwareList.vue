@@ -23,7 +23,7 @@
         <van-search
           v-model="searchValue"
           shape="round"
-          @search="getSoftWareList"
+          @search="searchSoftList"
           background="#1885A6"
           placeholder="请输入搜索关键词"
         />
@@ -106,6 +106,18 @@ export default {
         page: data.page,
         pageSize: data.pageSize,
         type: Number(type),
+      };
+      getSoftwareListAPi(params).then((res) => {
+        if (res.list.length > 0) {
+          data.softwareInfo = res.list;
+        }
+      });
+    };
+    const searchSoftList = () => {
+      let params = {
+        page: 1,
+        pageSize: 30,
+        type: 0,
         name: data.searchValue,
       };
       getSoftwareListAPi(params).then((res) => {
@@ -181,6 +193,7 @@ export default {
       goTop,
       downsoftware,
       goDetail,
+      searchSoftList
     };
   },
 };
