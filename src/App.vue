@@ -8,7 +8,12 @@ import HelloWorld from "./components/HelloWorld.vue";
   <!-- <img alt="Vue logo" src="./assets/logo.png" />
   <HelloWorld msg="Hello Vue 3 + Vite" />
  <van-button type="primary">主要按钮</van-button> -->
-  <router-view></router-view>
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" v-if="$route.meta.keepAlive" />
+    </keep-alive>
+    <component :is="Component" v-if="!$route.meta.keepAlive" />
+  </router-view>
 </template>
 
 <style>

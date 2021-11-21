@@ -8,15 +8,14 @@
     />
     <div class="container">
       <van-image :src="softwareInfo.detailImg" />
-        <p class="detailWord">
-          简介：
-        {{softwareInfo.description}}
-
-        </p>
+      <p class="detailWord">
+        简介：
+        {{ softwareInfo.description }}
+      </p>
     </div>
-         <div class="downsoft" @click="downsoftware(softwareInfo.downloadUrl)">
-          立即下载
-        </div>
+    <div class="downsoft" @click="downsoftware(softwareInfo.downloadUrl)">
+      立即下载
+    </div>
   </div>
 </template>
 
@@ -49,7 +48,7 @@ export default {
     const downsoftware = (url) => {
       window.open(url);
     };
-    return { ...toRefs(data), onClickLeft,downsoftware };
+    return { ...toRefs(data), onClickLeft, downsoftware };
   },
 };
 </script>
@@ -60,7 +59,7 @@ export default {
   .container {
     box-sizing: border-box;
     padding: 10px;
-      background: #fff;
+    background: #fff;
     .detailWord {
       font-size: 16px;
       text-align: left;
@@ -68,12 +67,10 @@ export default {
   }
 }
 .app {
-
   background: no-repeat;
   background-size: cover;
   background-position: center;
 }
-
 
 // /deep/.van-grid-item--square{
 //   opacity: .9;
@@ -81,18 +78,18 @@ export default {
 // /deep/.van-grid-item__text{
 //   font-size: 18px;
 // }
-    .downsoft {
-      padding: 12px 20px;
-      bottom: 0;
-      background-color: #1885a6;
-      overflow: hidden;
-      text-align: center;
-      border-radius: 0px 0px 12px 12px;
-      font-weight: 700;
-      font-size: 16px;
-      position: fixed;
-      bottom:0;
-      width: 90%;
-      color: #fff;
-    }
+.downsoft {
+  padding: 12px 20px;
+  bottom: 0;
+  background-color: #1885a6;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 0px 0px 12px 12px;
+  font-weight: 700;
+  font-size: 16px;
+  position: fixed;
+  bottom: 0;
+  width: 90%;
+  color: #fff;
+}
 </style>

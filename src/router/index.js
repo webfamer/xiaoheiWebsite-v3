@@ -17,7 +17,10 @@ const routes = [
   {
     path: '/softwareList',
     name: 'softwareList',
-    component: () => import('@/views/softwareList.vue')
+    component: () => import('@/views/softwareList.vue'),
+    meta: {
+      keepAlive: true //设置是否需要缓存
+    }
   },
   {
     path: '/softwareDetail',
